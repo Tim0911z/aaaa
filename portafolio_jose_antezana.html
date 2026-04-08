@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio – José Manuel Antezana Gómez</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --border: rgba(201,168,76,0.2);
+    --red: #e05252;
+    --blue: #4a9eff;
+    --green: #56d364;
+    --purple: #bc8cff;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND TEXTURE ── */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 90%, rgba(74,158,255,0.03) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.3' opacity='0.08'%3E%3Crect x='0.5' y='0.5' width='59' height='59'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    z-index: 1;
+    padding: 80px 40px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-line {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .header-line::before {
+    content:'';
+    display:block;
+    width:40px; height:2px;
+    background: var(--gold);
+  }
+
+  .header-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  h1 span { color: var(--gold); font-style: italic; }
+
+  .subtitle {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: right;
+  }
+
+  .contact-item {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .contact-item .icon { color: var(--gold); font-size: 0.9rem; }
+
+  /* ── STATS BAR ── */
+  .stats {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 40px;
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 10px 20px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── FILTERS ── */
+  .filters {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,17,23,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-right: 8px;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 40px 80px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .icon-gold { background: var(--gold-dim); border: 1px solid var(--border); }
+  .icon-blue { background: rgba(74,158,255,0.1); border: 1px solid rgba(74,158,255,0.25); }
+  .icon-green { background: rgba(86,211,100,0.1); border: 1px solid rgba(86,211,100,0.25); }
+  .icon-purple { background: rgba(188,140,255,0.1); border: 1px solid rgba(188,140,255,0.25); }
+  .icon-red { background: rgba(224,82,82,0.1); border: 1px solid rgba(224,82,82,0.25); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .section-count {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    background: var(--bg3);
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── CARDS GRID ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .cards-single { grid-template-columns: 1fr; }
+  .cards-wide { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: default;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .card::before {
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.1);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  /* Special card variants */
+  .card-experience {
+    border-color: rgba(86,211,100,0.25);
+    background: linear-gradient(135deg, var(--bg2) 0%, rgba(86,211,100,0.03) 100%);
+  }
+  .card-experience::before { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+  .card-experience:hover { border-color: rgba(86,211,100,0.5); }
+
+  .card-academic {
+    border-color: rgba(74,158,255,0.25);
+    background: linear-gradient(135deg, var(--bg2) 0%, rgba(74,158,255,0.03) 100%);
+  }
+  .card-academic::before { background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+  .card-academic:hover { border-color: rgba(74,158,255,0.5); }
+
+  .card-honor {
+    background: linear-gradient(135deg, var(--bg2) 0%, rgba(201,168,76,0.05) 100%);
+  }
+
+  .card-ibm {
+    border-color: rgba(74,158,255,0.3);
+    background: linear-gradient(135deg, var(--bg2) 0%, rgba(74,158,255,0.05) 100%);
+  }
+
+  /* ── CARD CONTENT ── */
+  .card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .badge-honor { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .badge-alto { background: rgba(188,140,255,0.15); color: var(--purple); border: 1px solid rgba(188,140,255,0.3); }
+  .badge-cert { background: rgba(86,211,100,0.1); color: var(--green); border: 1px solid rgba(86,211,100,0.25); }
+  .badge-tedi { background: rgba(201,168,76,0.08); color: var(--gold-light); border: 1px solid var(--border); }
+  .badge-sencico { background: rgba(224,82,82,0.1); color: var(--red); border: 1px solid rgba(224,82,82,0.25); }
+  .badge-udemy { background: rgba(188,140,255,0.1); color: var(--purple); border: 1px solid rgba(188,140,255,0.25); }
+  .badge-ibm { background: rgba(74,158,255,0.12); color: var(--blue); border: 1px solid rgba(74,158,255,0.3); }
+  .badge-upc { background: rgba(224,82,82,0.1); color: #ff8a8a; border: 1px solid rgba(224,82,82,0.25); }
+  .badge-exp { background: rgba(86,211,100,0.12); color: var(--green); border: 1px solid rgba(86,211,100,0.3); }
+  .badge-acad { background: rgba(74,158,255,0.12); color: var(--blue); border: 1px solid rgba(74,158,255,0.3); }
+  .badge-pub { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .card-issuer {
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .meta-pill {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    background: var(--bg3);
+    padding: 3px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .meta-pill.highlight {
+    color: var(--gold-light);
+    background: var(--gold-dim);
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .card-modules {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .modules-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .module-item {
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    padding: 2px 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .module-item::before {
+    content: '—';
+    color: var(--gold);
+    opacity: 0.5;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .score-bar {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .score-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .score-value { color: var(--gold-light); }
+
+  .score-track {
+    height: 3px;
+    background: var(--bg3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .score-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    animation: fillBar 1.2s ease both;
+  }
+
+  /* Experience card special layout */
+  .exp-projects {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .exp-project {
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    line-height: 1.4;
+  }
+
+  .exp-project:last-child { border-bottom: none; }
+
+  .exp-project strong {
+    color: var(--text);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.78rem;
+  }
+
+  /* Reg number */
+  .cert-num {
+    margin-top: 14px;
+    font-size: 0.68rem;
+    color: rgba(139,148,158,0.5);
+    font-family: monospace;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SKILLS STRIP ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 0;
+  }
+
+  .skill-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: all 0.2s;
+  }
+
+  .skill-item:hover {
+    border-color: rgba(201,168,76,0.4);
+    background: var(--bg3);
+  }
+
+  .skill-name {
+    font-size: 0.82rem;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .skill-level {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  /* ── RESEARCH CARD ── */
+  .research-card {
+    background: linear-gradient(135deg, var(--bg2) 0%, rgba(201,168,76,0.05) 100%);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 12px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .research-card::after {
+    content: 'DOI';
+    position: absolute;
+    right: 20px; top: 20px;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    opacity: 0.3;
+    font-weight: 700;
+  }
+
+  .doi-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 0.78rem;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 5px 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .doi-link:hover {
+    background: var(--gold-dim);
+    border-color: rgba(201,168,76,0.5);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .footer-note {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  @keyframes fillBar {
+    from { width: 0; }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.10s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.20s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.30s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    header { grid-template-columns: 1fr; padding: 50px 20px 40px; }
+    .contact-bar { text-align: left; }
+    .contact-item { justify-content: flex-start; }
+    .stats { padding: 20px; flex-wrap: wrap; }
+    .stat { min-width: 45%; border-right: none; }
+    main { padding: 30px 20px 60px; }
+    .filters { padding: 12px 20px; }
+    footer { padding: 20px; }
+  }
+
+  /* hidden class for filter */
+  .card.hidden { display: none; }
+  .section.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="header-line">
+      <span class="header-label">Portafolio Profesional · 2026</span>
+    </div>
+    <h1>José Manuel<br><span>Antezana Gómez</span></h1>
+    <p class="subtitle">Bachiller en Ingeniería Civil · Investigador · Especialista BIM & Gestión de Proyectos</p>
+  </div>
+  <div class="contact-bar">
+    <div class="contact-item">
+      <span class="icon">✉</span>
+      <span>jm.antezana.gomez@gmail.com</span>
+    </div>
+    <div class="contact-item">
+      <span class="icon">📱</span>
+      <span>+51 928 861 898</span>
+    </div>
+    <div class="contact-item">
+      <span class="icon">📍</span>
+      <span>Huancayo, Junín · Perú</span>
+    </div>
+    <div class="contact-item">
+      <span class="icon">🎓</span>
+      <span>Universidad Tecnológica del Perú</span>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <span class="stat-num">18</span>
+    <span class="stat-label">Certificaciones</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">290+</span>
+    <span class="stat-label">Horas Lectivas</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">1200</span>
+    <span class="stat-label">Horas de Práctica</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">1</span>
+    <span class="stat-label">Publicación Int.</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">6</span>
+    <span class="stat-label">Honores al Mérito</span>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters" id="filters-bar">
+  <span class="filter-label">Filtrar:</span>
+  <button class="filter-btn active" onclick="filterSection('all', this)">Todos</button>
+  <button class="filter-btn" onclick="filterSection('experiencia', this)">Experiencia</button>
+  <button class="filter-btn" onclick="filterSection('academico', this)">Académico</button>
+  <button class="filter-btn" onclick="filterSection('gestion', this)">Gestión & Costos</button>
+  <button class="filter-btn" onclick="filterSection('bim', this)">BIM & Planos</button>
+  <button class="filter-btn" onclick="filterSection('datos', this)">Datos & Software</button>
+  <button class="filter-btn" onclick="filterSection('ia', this)">Inteligencia Artificial</button>
+  <button class="filter-btn" onclick="filterSection('investigacion', this)">Investigación</button>
+</div>
+
+<main>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 1. EXPERIENCIA PROFESIONAL -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" data-cat="experiencia">
+    <div class="section-header">
+      <div class="section-icon icon-green">🏢</div>
+      <h2 class="section-title">Experiencia Profesional</h2>
+      <span class="section-count">1 constancia</span>
+    </div>
+    <div class="cards">
+
+      <div class="card card-experience" data-cat="experiencia">
+        <span class="card-badge badge-exp">✔ Constancia Verificada</span>
+        <h3 class="card-title">Practicante Preprofesional de Ingeniería Civil</h3>
+        <div class="card-issuer">VALEOR E.I.R.L. — Huancayo, Junín</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Ene 2025 – Jun 2025</span>
+          <span class="meta-pill highlight">⏱ 1,200 horas</span>
+          <span class="meta-pill">🏛 RUC: 20603769849</span>
+        </div>
+        <div class="exp-projects">
+          <div class="modules-label">Proyectos Desarrollados</div>
+          <div class="exp-project">
+            <strong>Mejoramiento I.E. Divino Niño Jesús y otros (4 distritos – ICA) · CUI 2554124</strong>
+            Elaboración de expediente técnico, metrados, costos y compatibilización de especialidades.
+          </div>
+          <div class="exp-project">
+            <strong>Instituto Superior Pedagógico Juan XXII – ICA · CUI 2546899</strong>
+            Digitalización de planos, metrados, actualización de presupuestos y especificaciones técnicas.
+          </div>
+          <div class="exp-project">
+            <strong>Renovación Puente – Vía Vecinal JU-994 (Yanacancha–Huaripirca) · CUI 2638365</strong>
+            Planos de estructuras, metrados, presupuestos y panel fotográfico.
+          </div>
+          <div class="exp-project">
+            <strong>Vía Vecinal JU-790 (Yanacancha–Cachi) · CUI 2709001</strong>
+            Planos de planta, perfil, secciones transversales, metrados de pavimentos y foliado del expediente.
+          </div>
+        </div>
+        <div class="cert-num">Gerente General: Ing. Joel F. Orihuela Maravi · Firmado: 30 de junio de 2025</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 2. FORMACIÓN ACADÉMICA -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" data-cat="academico">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🎓</div>
+      <h2 class="section-title">Formación Académica</h2>
+      <span class="section-count">1 grado</span>
+    </div>
+    <div class="cards">
+
+      <div class="card card-academic" data-cat="academico">
+        <span class="card-badge badge-acad">🎓 Bachiller</span>
+        <h3 class="card-title">Bachiller en Ingeniería Civil</h3>
+        <div class="card-issuer">Universidad Tecnológica del Perú (UTP) — Huancayo, Perú</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Egresado 2025</span>
+          <span class="meta-pill">🏛 Modalidad Presencial</span>
+        </div>
+        <p class="card-desc">
+          Sólida base técnica en geotecnia, análisis estructural, gestión de proyectos de infraestructura y elaboración de expedientes técnicos.
+          Especialización práctica en oficina técnica, costos unitarios, metrados y compatibilización de especialidades.
+        </p>
+        <div class="cert-num">Diploma de Bachiller · Universidad Tecnológica del Perú</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 3. GESTIÓN DE PROYECTOS & COSTOS -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" data-cat="gestion">
+    <div class="section-header">
+      <div class="section-icon icon-gold">📋</div>
+      <h2 class="section-title">Gestión de Proyectos & Costos</h2>
+      <span class="section-count">7 certificados</span>
+    </div>
+    <div class="cards cards-wide">
+
+      <!-- TALLER INGENIERÍA DE COSTOS -->
+      <div class="card card-honor" data-cat="gestion">
+        <span class="card-badge badge-honor">🏅 Honor al Mérito</span>
+        <h3 class="card-title">Taller Práctico de Ingeniería de Costos</h3>
+        <div class="card-issuer">TEDI — Escuela de Gestión de la Construcción</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Ene 2026</span>
+          <span class="meta-pill">⏱ 6 horas</span>
+          <span class="meta-pill highlight">⭐ 100 / 100 pts</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificación</span><span class="score-value">100 / 100</span></div>
+          <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Contenido</div>
+          <div class="module-item">Control de Costos en Proyectos (Ingeniería de Costos)</div>
+          <div class="module-item">Taller de Ejercicios Prácticos</div>
+        </div>
+        <div class="cert-num">N° TPIC10706-03-5894 · 14 ene 2026</div>
+      </div>
+
+      <!-- PLANIFICACIÓN Y ANÁLISIS COSTOS PMI -->
+      <div class="card card-honor" data-cat="gestion">
+        <span class="card-badge badge-honor">🏅 Honor al Mérito</span>
+        <h3 class="card-title">Planificación y Análisis de Costos y Riesgos — Enfoque PMI</h3>
+        <div class="card-issuer">TEDI — Escuela de Gestión de la Construcción</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Mar–Abr 2026</span>
+          <span class="meta-pill">⏱ 11 horas</span>
+          <span class="meta-pill highlight">⭐ 98 / 100 pts</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificación</span><span class="score-value">98 / 100</span></div>
+          <div class="score-track"><div class="score-fill" style="width:98%"></div></div>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Módulos</div>
+          <div class="module-item">Introducción a la planificación y control de proyectos</div>
+          <div class="module-item">Formulación del Proyecto: Alternativas, Criterios y Alcance</div>
+          <div class="module-item">Evaluación Económica y de Valor</div>
+          <div class="module-item">Riesgos, Viabilidad Final y Caso de Negocio</div>
+        </div>
+        <div class="cert-num">N° PACRPCEP10706-03-8135 · 01 abr 2026</div>
+      </div>
+
+      <!-- GESTIÓN PROYECTOS PMI -->
+      <div class="card" data-cat="gestion">
+        <span class="card-badge badge-tedi">TEDI</span>
+        <h3 class="card-title">Gestión de Proyectos de Construcción según PMI</h3>
+        <div class="card-issuer">TEDI — Buenas Prácticas del PMI</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Abr–May 2025</span>
+          <span class="meta-pill">⏱ 16 horas</span>
+          <span class="meta-pill">70 / 100 pts</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificación</span><span class="score-value">70 / 100</span></div>
+          <div class="score-track"><div class="score-fill" style="width:70%"></div></div>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Módulos</div>
+          <div class="module-item">Introducción a la gestión de proyectos PMI</div>
+          <div class="module-item">Planeamiento de un proyecto de construcción</div>
+          <div class="module-item">Fundamentos de control de proyectos</div>
+          <div class="module-item">Gestión de documentos y Plan de proyecto</div>
+        </div>
+        <div class="cert-num">N° GPCSBPP91228-20250515 · 15 may 2025</div>
+      </div>
+
+      <!-- LAST PLANNER -->
+      <div class="card" data-cat="gestion">
+        <span class="card-badge badge-tedi">TEDI</span>
+        <h3 class="card-title">Uso de Herramienta Last Planner para Programación de Obras</h3>
+        <div class="card-issuer">TEDI — Lean Construction</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Nov 2024</span>
+          <span class="meta-pill">⏱ 11 horas</span>
+          <span class="meta-pill">85 / 100 pts</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificación</span><span class="score-value">85 / 100</span></div>
+          <div class="score-track"><div class="score-fill" style="width:85%"></div></div>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Módulos</div>
+          <div class="module-item">Introducción a Lean Construction y Last Planner</div>
+          <div class="module-item">Herramientas Last Planner Parte I, II y III</div>
+          <div class="module-item">Módulo adicional de Habilidades Blandas</div>
+        </div>
+        <div class="cert-num">N° UHLPPO71959-20241121 · 21 nov 2024</div>
+      </div>
+
+      <!-- EXPEDIENTES TÉCNICOS -->
+      <div class="card" data-cat="gestion">
+        <span class="card-badge badge-tedi">TEDI · 100/100</span>
+        <h3 class="card-title">Elaboración de Expedientes Técnicos para Instituciones Educativas</h3>
+        <div class="card-issuer">TEDI — Nueva Ley de Contrataciones</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Feb 2025</span>
+          <span class="meta-pill">⏱ 11 horas</span>
+          <span class="meta-pill highlight">⭐ 100 / 100 pts</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificación</span><span class="score-value">100 / 100</span></div>
+          <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Módulos</div>
+          <div class="module-item">Marco Normativo Vigente y Fases del Expediente Técnico</div>
+          <div class="module-item">Programación de Áreas para Instituciones Educativas</div>
+          <div class="module-item">Errores Comunes que Generan Fracasos en la Ejecución</div>
+        </div>
+        <div class="cert-num">N° EETIELC84097-20250304 · 4 mar 2025</div>
+      </div>
+
+      <!-- S10 -->
+      <div class="card" data-cat="gestion">
+        <span class="card-badge badge-sencico" style="background:rgba(201,168,76,0.08);color:var(--gold-light);border-color:var(--border);">CIP Piura · TEDI</span>
+        <h3 class="card-title">S10 Costos y Presupuestos</h3>
+        <div class="card-issuer">TEDI — Colegio de Ingenieros del Perú, Consejo Departamental Piura</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Feb–Mar 2023</span>
+          <span class="meta-pill">⏱ 29 horas</span>
+          <span class="meta-pill">Nota: 15 / 20</span>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Módulos</div>
+          <div class="module-item">Introducción e Interfaz del Software</div>
+          <div class="module-item">Creación de Presupuesto y Pie de Presupuesto</div>
+          <div class="module-item">Fórmula Polinómica y Base de Datos Personal</div>
+          <div class="module-item">Creación de Presupuesto de Edificaciones</div>
+        </div>
+        <div class="cert-num">N° S10CP11717-20230411 · 14 abr 2023</div>
+      </div>
+
+      <!-- SEMINARIO NTE E.030 -->
+      <div class="card" data-cat="gestion">
+        <span class="card-badge badge-alto">🔷 Alto Rendimiento</span>
+        <h3 class="card-title">Seminario Técnico: Modificaciones de la NTE E.030</h3>
+        <div class="card-issuer">TEDI — Escuela de Ingeniería Estructural</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Dic 2025</span>
+          <span class="meta-pill">⏱ 8 horas</span>
+          <span class="meta-pill">80 / 100 pts</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificación</span><span class="score-value">80 / 100</span></div>
+          <div class="score-track"><div class="score-fill" style="width:80%"></div></div>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Módulos</div>
+          <div class="module-item">Actualización Geotécnica y Espectral</div>
+          <div class="module-item">Nuevos Parámetros Estructurales</div>
+          <div class="module-item">Implicancias, Desafíos y Proyecciones de la E.030</div>
+        </div>
+        <div class="cert-num">N° STMITISC10706-02-765 · 10 ene 2026</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 4. BIM & LECTURA DE PLANOS -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" data-cat="bim">
+    <div class="section-header">
+      <div class="section-icon icon-purple">🏗️</div>
+      <h2 class="section-title">BIM, Modelado & Lectura de Planos</h2>
+      <span class="section-count">6 certificados</span>
+    </div>
+    <div class="cards">
+
+      <!-- REVIT -->
+      <div class="card" data-cat="bim">
+        <span class="card-badge badge-tedi">BIM Training Center · TEDI</span>
+        <h3 class="card-title">Modelado BIM con REVIT</h3>
+        <div class="card-issuer">TEDI — Programa BIM Training Center / Autodesk ATC</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Nov 2024 – Ene 2025</span>
+          <span class="meta-pill">⏱ 21 horas</span>
+          <span class="meta-pill">80 / 100 pts</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificación</span><span class="score-value">80 / 100</span></div>
+          <div class="score-track"><div class="score-fill" style="width:80%"></div></div>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Módulos</div>
+          <div class="module-item">Introducción a Revit y Modelado de Arquitectura</div>
+          <div class="module-item">Modelado de Estructuras e Instalaciones</div>
+          <div class="module-item">Anotaciones, Metrados en Revit y Exportación</div>
+        </div>
+        <div class="cert-num">N° MBR74518-20250115 · 16 ene 2025</div>
+      </div>
+
+      <!-- PERMEABILIDAD (honor) -->
+      <div class="card card-honor" data-cat="bim">
+        <span class="card-badge badge-honor">🏅 Honor al Mérito</span>
+        <h3 class="card-title">Permeabilidad del Concreto y Vida Útil de Estructuras</h3>
+        <div class="card-issuer">TEDI — Escuela de Gestión de la Construcción</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 May–Jun 2025</span>
+          <span class="meta-pill">⏱ 8 horas</span>
+          <span class="meta-pill highlight">⭐ 100 / 100 pts</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificación</span><span class="score-value">100 / 100</span></div>
+          <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+        </div>
+        <div class="card-modules">
+          <div class="modules-label">Módulos</div>
+          <div class="module-item">Importancia y medición in situ de la permeabilidad</div>
+          <div class="module-item">Conceptos de Permeabilidad y Durabilidad del Concreto</div>
+          <div class="module-item">Durabilidad según Normas E060/ACI 318</div>
+          <div class="module-item">Medición No Destructiva y Vida Útil de Estructuras</div>
+        </div>
+        <div class="cert-num">N° PCVUE82081-03-233 · 21 jun 2025</div>
+      </div>
+
+      <!-- SENCICO ARQUITECTURA -->
+      <div class="card" data-cat="bim">
+        <span class="card-badge badge-sencico">SENCICO · Virtual</span>
+        <h3 class="card-title">Lectura de Planos de Arquitectura</h3>
+        <div class="card-issuer">SENCICO — Programa de Perfeccionamiento y Especialización</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Mar 2023</span>
+          <span class="meta-pill">⏱ 25 horas</span>
+          <span class="meta-pill highlight">📊 19.8 / 20</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificativo</span><span class="score-value">19.8 / 20</span></div>
+          <div class="score-track"><div class="score-fill" style="width:99%"></div></div>
+        </div>
+        <p class="card-desc">Plantas, ubicación, cortes, elevaciones, detalles de acabados y planos de seguridad en proyectos de viviendas y edificaciones comerciales.</p>
+        <div class="cert-num">N° PE-001621 · 29 mar 2023</div>
+      </div>
+
+      <!-- SENCICO ESTRUCTURAS -->
+      <div class="card" data-cat="bim">
+        <span class="card-badge badge-sencico">SENCICO · Virtual</span>
+        <h3 class="card-title">Lectura de Planos de Estructuras</h3>
+        <div class="card-issuer">SENCICO — Programa de Perfeccionamiento y Especialización</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 May 2023</span>
+          <span class="meta-pill">⏱ 30 horas</span>
+          <span class="meta-pill highlight">📊 17.8 / 20</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificativo</span><span class="score-value">17.8 / 20</span></div>
+          <div class="score-track"><div class="score-fill" style="width:89%"></div></div>
+        </div>
+        <p class="card-desc">Cimentaciones, columnas, muros, placas, vigas, losas y detalles de escaleras, cisterna, tanque elevado y ascensor.</p>
+        <div class="cert-num">N° PE-003512 · 4 may 2023</div>
+      </div>
+
+      <!-- SENCICO SANITARIAS -->
+      <div class="card" data-cat="bim">
+        <span class="card-badge badge-sencico">SENCICO · Virtual</span>
+        <h3 class="card-title">Lectura de Planos de Instalaciones Sanitarias</h3>
+        <div class="card-issuer">SENCICO — Programa de Perfeccionamiento y Especialización</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Abr 2023</span>
+          <span class="meta-pill">⏱ 30 horas</span>
+          <span class="meta-pill highlight">📊 16.9 / 20</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificativo</span><span class="score-value">16.9 / 20</span></div>
+          <div class="score-track"><div class="score-fill" style="width:84.5%"></div></div>
+        </div>
+        <p class="card-desc">Sistemas de abastecimiento de agua potable, desagüe, ventilación, isometrías y montantes en proyectos de instalaciones sanitarias.</p>
+        <div class="cert-num">N° PE-001952 · 4 abr 2023</div>
+      </div>
+
+      <!-- SENCICO ELÉCTRICAS -->
+      <div class="card" data-cat="bim">
+        <span class="card-badge badge-sencico">SENCICO · Virtual</span>
+        <h3 class="card-title">Lectura de Planos de Instalaciones Eléctricas</h3>
+        <div class="card-issuer">SENCICO — Programa de Perfeccionamiento y Especialización</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Mar 2023</span>
+          <span class="meta-pill">⏱ 24 horas</span>
+          <span class="meta-pill highlight">📊 18.4 / 20</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-label"><span>Calificativo</span><span class="score-value">18.4 / 20</span></div>
+          <div class="score-track"><div class="score-fill" style="width:92%"></div></div>
+        </div>
+        <p class="card-desc">Alumbrado, tomacorrientes, cuadro de cargas, diagrama unifilar, montantes y sistema de puesta a tierra en viviendas y edificios.</p>
+        <div class="cert-num">N° PE-001638 · 31 mar 2023</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 5. ANÁLISIS DE DATOS & SOFTWARE -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" data-cat="datos">
+    <div class="section-header">
+      <div class="section-icon icon-blue">📊</div>
+      <h2 class="section-title">Análisis de Datos & Ofimática</h2>
+      <span class="section-count">4 certificados</span>
+    </div>
+    <div class="cards">
+
+      <!-- ANÁLISIS DE DATOS POWER BI (UPC) -->
+      <div class="card" data-cat="datos">
+        <span class="card-badge badge-upc">UPC · Becas Grupo Romero</span>
+        <h3 class="card-title">Análisis de Datos con Power BI</h3>
+        <div class="card-issuer">Universidad Peruana de Ciencias Aplicadas (UPC) — Fundación Romero</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Mar 2026</span>
+          <span class="meta-pill">⏱ 15 horas lectivas</span>
+        </div>
+        <p class="card-desc">Curso de análisis de datos con Power BI avalado por la UPC y Becas Grupo Romero. Código de verificación: fpHPPajvih.</p>
+        <div class="cert-num">Código: fpHPPajvih · Emitido: 25/03/2026</div>
+      </div>
+
+      <!-- ANALÍTICA AVANZADA POWER BI (Udemy) -->
+      <div class="card" data-cat="datos">
+        <span class="card-badge badge-udemy">Udemy</span>
+        <h3 class="card-title">Analítica Avanzada con Power BI</h3>
+        <div class="card-issuer">Udemy — Instructor: Gilvard Pérez</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Mar 2026</span>
+          <span class="meta-pill">⏱ 4 horas</span>
+        </div>
+        <p class="card-desc">Certificado de finalización en Analítica Avanzada con Power BI. Técnicas avanzadas de modelado y visualización de datos.</p>
+        <div class="cert-num">N° UC-e3a4e48a-5bd2-483f-86c1-16b928636bca</div>
+      </div>
+
+      <!-- POWER BI FUNDAMENTOS -->
+      <div class="card" data-cat="datos">
+        <span class="card-badge badge-udemy">Certificación Online</span>
+        <h3 class="card-title">Power BI — Fundamentos</h3>
+        <div class="card-issuer">Plataforma Online — Certificado de Finalización</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Mar 2026</span>
+          <span class="meta-pill">⏱ 8 horas · 2 Módulos</span>
+        </div>
+        <p class="card-desc">Fundamentos de Power BI: importación de datos, modelado, DAX básico y creación de dashboards interactivos.</p>
+        <div class="cert-num">N° OA-2026-0325002401685 · 25 mar 2026</div>
+      </div>
+
+      <!-- EXCEL AVANZADO -->
+      <div class="card" data-cat="datos">
+        <span class="card-badge badge-udemy">Certificación Online</span>
+        <h3 class="card-title">Excel — Intermedio a Avanzado</h3>
+        <div class="card-issuer">Plataforma Online — Certificado de Finalización</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Mar 2026</span>
+          <span class="meta-pill">⏱ 8 horas · 2 Módulos</span>
+        </div>
+        <p class="card-desc">Dominio de Excel avanzado: tablas dinámicas, macros, fórmulas complejas y gestión de datos para ingeniería y metrados.</p>
+        <div class="cert-num">N° OA-2026-0325002401630 · 25 mar 2026</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 6. INTELIGENCIA ARTIFICIAL -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" data-cat="ia">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🤖</div>
+      <h2 class="section-title">Inteligencia Artificial</h2>
+      <span class="section-count">1 certificado</span>
+    </div>
+    <div class="cards">
+
+      <div class="card card-ibm" data-cat="ia">
+        <span class="card-badge badge-ibm">IBM SkillsBuild · Credly</span>
+        <h3 class="card-title">AI Fundamentals: Foundations for Understanding AI</h3>
+        <div class="card-issuer">IBM SkillsBuild — Verificable en Credly</div>
+        <div class="card-meta">
+          <span class="meta-pill">📅 Abr 2026</span>
+          <span class="meta-pill highlight">🔗 Verificable Online</span>
+        </div>
+        <p class="card-desc">
+          Fundamentos de Inteligencia Artificial emitido por IBM SkillsBuild. Abarca conceptos base de IA, machine learning y aplicaciones prácticas.
+          Credencial verificable públicamente a través de la plataforma Credly.
+        </p>
+        <a class="doi-link" href="https://www.credly.com/go/LXUnD0xw" target="_blank">🔗 Verificar Credencial en Credly</a>
+        <div class="cert-num">Issued: 05 APR 2026 · Verify: credly.com/go/LXUnD0xw</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 7. INVESTIGACIÓN CIENTÍFICA -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" data-cat="investigacion">
+    <div class="section-header">
+      <div class="section-icon icon-gold">🔬</div>
+      <h2 class="section-title">Investigación Científica</h2>
+      <span class="section-count">1 publicación</span>
+    </div>
+
+    <div class="research-card" data-cat="investigacion">
+      <span class="card-badge badge-pub">📄 Publicación Internacional · HRPUB</span>
+      <h3 class="card-title" style="font-size:1.2rem; margin-bottom:10px;">
+        "Estabilización de Suelos Arcillosos con Ceniza de Eucalipto en Hornos Artesanales"
+      </h3>
+      <div class="card-issuer">Civil Engineering and Architecture (CEA) — Horizon Research Publishing (HRPUB)</div>
+      <div class="card-meta">
+        <span class="meta-pill">📅 2025–2026</span>
+        <span class="meta-pill highlight">🌍 Publicación Internacional</span>
+        <span class="meta-pill">📑 Estándar IEEE / APA 7ma ed.</span>
+        <span class="meta-pill">🏛 Geotecnia</span>
+      </div>
+      <p class="card-desc" style="margin-top:14px;">
+        Investigación original sobre la estabilización de suelos arcillosos utilizando ceniza de eucalipto producida en hornos artesanales.
+        Incluye procesamiento estadístico de ensayos de laboratorio, modelado de resultados geotécnicos y redacción técnica bajo normativa IEEE.
+      </p>
+      <a class="doi-link" href="https://doi.org/10.13189/cea.2026.140237" target="_blank">🔗 DOI: 10.13189/cea.2026.140237</a>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- HABILIDADES -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" data-cat="all-always">
+    <div class="section-header">
+      <div class="section-icon icon-gold">⚙️</div>
+      <h2 class="section-title">Software & Habilidades Técnicas</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item"><div class="skill-name">AutoCAD</div><div class="skill-level">Avanzado</div></div>
+      <div class="skill-item"><div class="skill-name">Revit (BIM)</div><div class="skill-level">Intermedio</div></div>
+      <div class="skill-item"><div class="skill-name">S10 Costos</div><div class="skill-level">Avanzado</div></div>
+      <div class="skill-item"><div class="skill-name">Microsoft Excel</div><div class="skill-level">Avanzado</div></div>
+      <div class="skill-item"><div class="skill-name">Power BI</div><div class="skill-level">Intermedio-Avanzado</div></div>
+      <div class="skill-item"><div class="skill-name">MS Project</div><div class="skill-level">Intermedio</div></div>
+      <div class="skill-item"><div class="skill-name">Last Planner</div><div class="skill-level">Intermedio</div></div>
+      <div class="skill-item"><div class="skill-name">ETABS / SAP2000</div><div class="skill-level">Básico-Intermedio</div></div>
+      <div class="skill-item"><div class="skill-name">IA & Prompt Engineering</div><div class="skill-level">Avanzado</div></div>
+      <div class="skill-item"><div class="skill-name">Redacción IEEE / APA</div><div class="skill-level">Avanzado</div></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-name">José Manuel Antezana Gómez</div>
+    <div class="footer-note" style="margin-top:4px;">Bachiller en Ingeniería Civil · UTP Huancayo · Egresado 2025</div>
+  </div>
+  <div class="footer-note">jm.antezana.gomez@gmail.com · +51 928 861 898</div>
+</footer>
+
+<script>
+  function filterSection(cat, btn) {
+    // Update buttons
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show/hide sections
+    document.querySelectorAll('section.section').forEach(sec => {
+      if (cat === 'all') {
+        sec.classList.remove('hidden');
+      } else {
+        const secCat = sec.getAttribute('data-cat');
+        if (secCat === cat || secCat === 'all-always') {
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>
